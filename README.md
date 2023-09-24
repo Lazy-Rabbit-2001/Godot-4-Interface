@@ -143,12 +143,12 @@ Of course will, since you can directly use interface(trait) in GDScript, and thi
 
 ## Known Issues
   1. Due to performance problems, if you don't implement all methods from an interface, no errors will be thrown. This is impossible to fix since method checking in `_init()` on each instance (especially when instances is of dozens) will take longer time than one without the checking. So it's allowed to partially implement, but also required to remember which methods are implemented and which are not.
-  2. Via this piece of code:
+  2. Via this piece of code:  
   ```GDScript
   var interface: MyInterface = MyInterface.get_interface(Implementer.new())
   var implementer: Implementer = interface.get_object()
   ```
-  Developers must make sure if the class Implementer does implement the interface; otherwise, the implementer will be null
+  Developers must make sure if the class `Implementer` does implement the interface; otherwise, the implementer will be `null`
 
 
 ## Credits
