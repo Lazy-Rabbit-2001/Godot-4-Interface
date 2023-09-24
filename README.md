@@ -115,5 +115,8 @@ and call `get_object()` method
 var object: Object = interface.get_object()
 ```
 
+## Known Issues
+Due to performance problems, if you don't implement all methods from an interface, no errors will be thrown. This is impossible to fix since method checking in `_init()` on each instance (especially when instances is of dozens) will take longer time than one without the checking. So it's allowed to partially implement, but also required to remember which methods are implemented and which are not.
+
 ## Credits
 Siobhan: Inspiration provider to this addon because of his video about making an interface.
