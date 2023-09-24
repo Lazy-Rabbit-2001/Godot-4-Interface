@@ -127,6 +127,9 @@ However, via this method, it's not beneficial for programmers to take up the hob
 # It will automatically pop up a hint when you done inputting "(Interface.get_interface(self, "MyInterface") as Interface.MyInterface/MyInterface)."
 ```
 
+## After `trait` keyword gets implemented, will this addon obsolescented?
+Of course will, since you can directly use interface(trait) in GDScript, and this addon is a **temporary** solution for it.
+
 ## Known Issues
 Due to performance problems, if you don't implement all methods from an interface, no errors will be thrown. This is impossible to fix since method checking in `_init()` on each instance (especially when instances is of dozens) will take longer time than one without the checking. So it's allowed to partially implement, but also required to remember which methods are implemented and which are not.
 
