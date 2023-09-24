@@ -65,7 +65,7 @@ class_name Interface
 ## [/codeblock]
 ## Just code:
 ## [codeblock]
-## var my_interface: Interface = Interface.new(ImplementerObject.new(...))
+## var my_interface: MyInterface = MyInterface.get_interface(ImplementerObject.new(...))
 ## var implementer: ImplementerObject = my_interface.get_object()
 ## [/codeblock]
 ## You can get access to "_object" in implementer interface to get reference to the implementer object
