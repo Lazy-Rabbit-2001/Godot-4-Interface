@@ -146,5 +146,5 @@ Due to performance problems, if you don't implement all methods from an interfac
 
 
 ## Credits
-Siobhan: Inspiration provider to this addon because of his tutorial about making an interface system in GDScript.
+Siobhan: Inspiration provider to this addon because of his tutorial about making an interface system in GDScript.  
 平英雄: Inspiration provider to this addon because of his tutorial about Strategy Pattern in GDScript.
