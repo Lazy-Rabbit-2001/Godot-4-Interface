@@ -134,7 +134,7 @@ However, via this method, it's not beneficial for them to take up hobbies of tak
 Also, `MyInterface.get_interface()` will give coding hint during their programming
 ```GDScript
 MyInterface.get_interface(self).my_func(...)
-# It will automatically pop up a hint when you done inputting `MyInterface.get_interface(self)`
+# It will automatically pop up a hint when they done inputting `MyInterface.get_interface(self)`
 ```
 
 ## After `trait` keyword gets implemented, will this addon be discarded?
