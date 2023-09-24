@@ -115,6 +115,19 @@ and call `get_object()` method
 var object: Object = interface.get_object()
 ```
 
+## Having `has_method()` and `call()`, Why there should Still be an Interface Addon?
+Good question. Of course, those who prefer dynamic calling are still allowed to use `has_method()` + `call()` to call methods
+```GDScript
+if object.has_method("my_func"):
+  object.my_func()
+```
+However, via this method, it's not beneficial for programmers to take up the hobby of using interface when switching to other OOP languages like C#, Java, etc. Also, `Interface.get_interface()` with `as` operator can provide coding hint
+```GDScript
+(Interface.get_interface(self, "MyInterface") as Interface.MyInterface/MyInterface).my_func(...)
+## It will automatically pop up a hint when you done inputting "(Interface.get_interface(self, "MyInterface") as Interface.MyInterface/MyInterface)."
+```
+
+
 ## Known Issues
 Due to performance problems, if you don't implement all methods from an interface, no errors will be thrown. This is impossible to fix since method checking in `_init()` on each instance (especially when instances is of dozens) will take longer time than one without the checking. So it's allowed to partially implement, but also required to remember which methods are implemented and which are not.
 
