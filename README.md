@@ -97,11 +97,11 @@ To create a custom interface:
      ]
      ```
 
-To call the method, you can call a static method `call_interface` in `Interface` class:  
+To call the method, you can call a static method `call_interface()` in `Interface` class:  
 ```GDScript
 func _ready() -> void:
   for i in get_tree().get_nodes_in_group("test"): # i's type is unknown and uncertain
-    Interface.call_method(i, "MyInterface", "my_func", [...])
+    Interface.call_interface(i, "MyInterface", "my_func", [...])
 ```
 
 To create an instance via the interface, you can:  
