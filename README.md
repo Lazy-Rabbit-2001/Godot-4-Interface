@@ -124,6 +124,13 @@ var interface: MyInterface = MyInterface.get_interface(Implementer.new())
 var implementer: Implementer = interface.get_object()
 ```
 
+To get access to the implementer object in the method in an implementer, just get access to `_object`:
+```GDScript
+class MyOtherInterface extends Interface.MyInterface:
+  func my_func(...) -> void:
+    print(_object) # Use "_object" to get access to the implementer object
+```
+
 ## Having `has_method()` and `call()`, Why Should there Still Be an Interface Addon?
 Good question. Of course, those who prefer dynamic calling are still allowed to use `has_method()` + `call()` to call methods
 ```GDScript
