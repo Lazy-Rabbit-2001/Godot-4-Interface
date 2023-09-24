@@ -84,13 +84,13 @@ To create a custom interface:
        func my_func_returnal(...) -> Type:
          ...
      ```
-  5. Instantiate the class above via any one of following two ways:
+  5. Instantiate the class above via any one of following two ways:  
      5.1. Via the constructor:  
      ```GDScript
      func _init(...) -> void:
        MyInterface.new(self) # "self" is REQUIRED TO BE PASSED IN
      ```
-     5.2. Via an `Array[Interface]`:
+     5.2. Via an `Array[Interface]`:  
      ```GDScript
      var _implements: Array[Interface] = [
        MyInterface.new(self) # "self" is REQUIRED TO BE PASSED IN
