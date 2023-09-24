@@ -114,3 +114,6 @@ and call `get_object()` method
 ``` GDScript
 var object: Object = interface.get_object()
 ```
+
+## Credits
+Siobhan: Inspiration provider to this addon because of his video about making an interface.
