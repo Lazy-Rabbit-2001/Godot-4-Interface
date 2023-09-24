@@ -127,7 +127,7 @@ However, via this method, it's not beneficial for programmers to take up the hob
 # It will automatically pop up a hint when you done inputting "(Interface.get_interface(self, "MyInterface") as Interface.MyInterface/MyInterface)."
 ```
 
-## After `trait` keyword gets implemented, will this addon obsolescented?
+## After `trait` keyword gets implemented, will this addon be discarded?
 Of course will, since you can directly use interface(trait) in GDScript, and this addon is a **temporary** solution for it.
 
 ## Known Issues
