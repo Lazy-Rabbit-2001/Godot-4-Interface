@@ -57,14 +57,14 @@ func _ready():
 Everything seemed to work fine. However, as the project grows up, it will become gradually obvious that the system is getting more and more complex, especially when A and B have more extending classes. One day, it becomes a question: What if the type of an object is unknown, and a call to a specific method is needed?  
 Thus, an interface system for GDScript is required, which is also the purpose of the addon.
 
-## How to install the addon?
+## How to Install the Addon?
 Very easy, just clone the git to the project being worked on  
 
-## How to use the addon?
+## How to Use the Addon?
 To create a custom interface:  
   1. In the `class_interface.gd`, define an inner class below the comment line, with inheritance from `Interface` class
-  2. In that inner class, define the abstract methods
-      **NOTE:**Currently there haven't been `abstract` keyword in GDScript, so each method to be defined are required to be filled with `pass` or `return null` initially
+  2. In that inner class, define the abstract methods  
+      **NOTE:** Currently there haven't been `abstract` keyword in GDScript, so each method to be defined are required to be filled with `pass` or `return null` initially
      ```GDScript
      class MyInterface extends Interface:
        func my_func(...) -> void: pass
