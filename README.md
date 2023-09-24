@@ -73,6 +73,8 @@ To create a custom interface:
   3. In the script to implement the interface, define an inner class extending the class above, and the name of the class to be define should keep the same as one to be extended:
      ```GDScript
      # In the implementer class
+     class_name Implementer
+     
      class MyInterface extends Interface.MyInterface:
        ...
      ```
@@ -84,7 +86,7 @@ To create a custom interface:
        func my_func_returnal(...) -> Type:
          ...
      ```
-  5. Instantiate the class above via any one of following two ways:  
+  5. Instantiate the class above via ANY ONE of the following two ways:  
      5.1. Via the constructor:  
      ```GDScript
      func _init(...) -> void:
@@ -104,15 +106,10 @@ func _ready() -> void:
     Interface.call_interface(i, "MyInterface", "my_func", [...])
 ```
 
-To create an instance via the interface, you can:  
+To create an instance via the interface implemented by some object, you can:  
 ```GDScript
-var object: Object = Object.new()
-var interface: Interface = Interface.new(object)
-var interface2: Interface2 = Interface2.new(object)
-```
-and call `get_object()` method
-``` GDScript
-var object: Object = interface.get_object()
+var interface: Interface.MyInterface = Interface.get_instance(Implementer.new())
+var implementer: Implementer = interface.get_object()
 ```
 
 ## Having `has_method()` and `call()`, Why there should Still be an Interface Addon?
