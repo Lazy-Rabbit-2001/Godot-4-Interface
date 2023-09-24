@@ -124,7 +124,7 @@ var interface: MyInterface = MyInterface.get_interface(Implementer.new())
 var implementer: Implementer = interface.get_object()
 ```
 
-## Having `has_method()` and `call()`, Why there should Still be an Interface Addon?
+## Having `has_method()` and `call()`, Why Should there Still Be an Interface Addon?
 Good question. Of course, those who prefer dynamic calling are still allowed to use `has_method()` + `call()` to call methods
 ```GDScript
 if object.has_method("my_func"):
