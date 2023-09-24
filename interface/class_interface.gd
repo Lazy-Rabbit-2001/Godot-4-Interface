@@ -52,7 +52,10 @@ class_name Interface
 ## Due to performance problems, if you don't implement all methods, no errors will be thrown, but you need to remember 
 ## which methods are implemented[br]
 ## [br]
-## To call an interface, just call a static method [method call_interface][br]
+## To call an interface method, just code like this:
+## [codeblock]
+## MyInterface.get_instance(<implementer, generally "self">).my_abstract_method(...)
+## [/codeblock]
 ## To check if an object has implemented an interface, just call a static method [method has_interface][br]
 ## It's also allowed to get an interface via a static method [method get_instance][br]
 ## [br]
@@ -84,7 +87,7 @@ func get_object() -> Object:
 	return _object
 
 
-## This method MUST be overrid and reset the reuturned value to the same as the name of interface you are to extend to
+## This method MUST be firstly overrid and reset the reuturned value to the same as the name of interface you are to extend to
 ## E.g.
 ## [codeblock]
 ## class MyInterface extends Interface:
@@ -98,14 +101,17 @@ static func get_interface_name() -> StringName:
 ## Returns an [Interface] instance the [param object] is implementing[br]
 ## [br]
 ## [b]Notes:[/b][br]
-## 1. When calling from the interface, please do [code]MyInterface.get_interface(object).my_abstract_method(...), making [param type] discarded when called[br]
-## 2. In the inheriter interfaces, this method MUST be overrid as:
+## 1. The instance MUST be got from the implementer interface, like [code]MyInterface.get_instance(self)[/code] 
+## rather than [code]Interface.get_instance(self)[/code] or [code]Interface.MyInterface.get_instance(self)[/code][br]
+## 2. When calling from the interface, please do [code]MyInterface.get_interface(object).my_abstract_method(...)[/code], 
+## making [param type] discarded when called[br]
+## 3. In the inheriter interfaces, this method MUST be overrid as:
 ## [codeblock]
-## The type of returned value should be the interface's type
+## # The type of returned value should be the interface's type
 ## static func get_interface(object: Object, type: StringName = get_interface_name()) -> MyInterface:
 ##     return super(object, type) as MyInterface
 ## [/codeblock]
-## 3. To make this work successfully, it's required to override [method get_interface_name] first
+## 4. To make this work successfully, it's required to override [method get_interface_name] first
 static func get_interface(object: Object, type: StringName = get_interface_name()):
 	return object.get_meta(_NAME + type, null)
 
@@ -116,20 +122,3 @@ static func has_interface(object: Object) -> bool:
 
 
 # 👇 === Here you can define your own interfaces == 👇 #
-
-class PhysicsHandler extends Interface:
-	static func get_interface_name() -> StringName:
-		return &"PhysicsHandler"
-
-
-	static func get_interface(object: Object, type: StringName = get_interface_name()) -> PhysicsHandler:
-		return super(object, type) as PhysicsHandler
-
-
-	func move(_delta: float) -> void: pass
-	func jump(_jumping_speed: float) -> void: pass
-	func accelerate(_to: Vector2, _acceleration: float, _delta: float) -> void: pass
-	func accelerate_x(_to: float, _acceleration: float, _delta: float) -> void: pass
-	func accelerate_(_to: float, _acceleration: float, _delta: float) -> void: pass
-	func turn_x() -> void: pass
-	func turn_y() -> void: pass
