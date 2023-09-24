@@ -67,6 +67,17 @@ To create a custom interface:
       **NOTE:** Currently there haven't been `abstract` keyword in GDScript, so each method to be defined are required to be filled with `pass` or `return null` initially
      ```GDScript
      class MyInterface extends Interface:
+       # This method MUST be overrid first
+       static func get_interface_name() -> String:
+         return &"MyInterface" # Keeps the same as the interface's name
+
+       # This method MUST be overrid with super(object, type) returned instead,
+       # and the type of returned value must be the same as the interface's type
+       # When calling this method, DO NOT input the second param and just call it like "MyInterface.get_interface(self)"
+       static func get_interface(object: Object, type: StringName = get_interface_name()) -> MyInterface:
+         return super(object, type) as MyInterface
+
+
        func my_func(...) -> void: pass
        func my_func_returnal(...) -> Type: return null
      ```
@@ -99,16 +110,17 @@ To create a custom interface:
      ]
      ```
 
-To call the method, you can call a static method `call_interface()` in `Interface` class:  
+To call the method, you can do it like this:  
 ```GDScript
 func _ready() -> void:
   for i in get_tree().get_nodes_in_group("test"): # i's type is unknown and uncertain
-    Interface.call_interface(i, "MyInterface", "my_func", [...])
+    if !MyInterface.has_interface(i): continue # Check if the object i has implemented the interface MyInterface, and if not, then skip calling
+    MyInterface.get_instance(i).my_func(...)
 ```
 
 To create an instance via the interface implemented by some object, you can:  
 ```GDScript
-var interface: Interface.MyInterface = Interface.get_instance(Implementer.new())
+var interface: MyInterface = Interface.get_instance(Implementer.new())
 var implementer: Implementer = interface.get_object()
 ```
 
@@ -118,17 +130,21 @@ Good question. Of course, those who prefer dynamic calling are still allowed to 
 if object.has_method("my_func"):
   object.my_func()
 ```
-However, via this method, it's not beneficial for programmers to take up the hobby of using interface when switching to other OOP languages like C#, Java, etc. Also, `Interface.get_interface()` with `as` operator can provide coding hint
+However, via this method, it's not beneficial for them to take up hobbies of taking interface into usage when they are switching to other OOP languages like C#, Java, etc.  
+Also, `MyInterface.get_interface()` will give coding hint during their programming
 ```GDScript
-(Interface.get_interface(self, "MyInterface") as Interface.MyInterface/MyInterface).my_func(...)
-# It will automatically pop up a hint when you done inputting "(Interface.get_interface(self, "MyInterface") as Interface.MyInterface/MyInterface)."
+MyInterface.get_interface(self).my_func(...)
+# It will automatically pop up a hint when you done inputting `MyInterface.get_interface(self)`
 ```
 
 ## After `trait` keyword gets implemented, will this addon be discarded?
 Of course will, since you can directly use interface(trait) in GDScript, and this addon is a **temporary** solution for it.
 
+
 ## Known Issues
 Due to performance problems, if you don't implement all methods from an interface, no errors will be thrown. This is impossible to fix since method checking in `_init()` on each instance (especially when instances is of dozens) will take longer time than one without the checking. So it's allowed to partially implement, but also required to remember which methods are implemented and which are not.
 
+
 ## Credits
-Siobhan: Inspiration provider to this addon because of his video about making an interface system in GDScript.
+Siobhan: Inspiration provider to this addon because of his tutorial about making an interface system in GDScript.
+平英雄: Inspiration provider to this addon because of his tutorial about Strategy Pattern in GDScript.
