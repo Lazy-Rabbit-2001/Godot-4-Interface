@@ -1,5 +1,5 @@
-# Godot-4-Interface
-A Custom Class for Godot 4 to Temporarily Provide Interface Function
+# Godot 4 GDScript Interface
+A custom class for Godot 4 to temporarily provide interface system for GDScript language
 
 ## What is Interface?
 An interface is such a thing **to define which methods should a class have and should implement**. It's such a function in most of modern computer languages like C#, Java, etc.  
