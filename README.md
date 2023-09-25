@@ -1,5 +1,12 @@
-# Godot 4 GDScript Interface
+# Godot 4 GDScript Interface v1.1
 A custom class for Godot 4 to temporarily provide interface system for GDScript language
+
+## Changelog
+### v1.1:  
+* Added implemention checking, now if you don't implement all methods from an interface in an implementer interface, an error will be thrown during the runtime
+* Changed names of some methods:
+*   `get_interface` -> `get_implemention`
+*   `has_interface` -> `is_implemented_by`
 
 ## What is Interface?
 An interface is such a thing **to define which methods should a class have and should be implemented**. It's such a function in most of modern computer languages like C#, Java, etc.  
