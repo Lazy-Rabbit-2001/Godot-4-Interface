@@ -54,10 +54,10 @@ class_name Interface
 ## [br]
 ## To call an interface method, just code like this:
 ## [codeblock]
-## MyInterface.get_instance(<implementer, generally "self">).my_abstract_method(...)
+## MyInterface.get_implemention(<implementer, generally "self">).my_abstract_method(...)
 ## [/codeblock]
-## To check if an object has implemented an interface, just call a static method [method has_interface][br]
-## It's also allowed to get an interface via a static method [method get_instance][br]
+## To check if an interface has benn implemented by an object, just call a static method [method is_implemented_by][br]
+## It's also allowed to get an interface via a static method [method get_implemention][br]
 ## [br]
 ## To instantiate an interface via the object implementing it, like:
 ## [codeblock]
@@ -65,12 +65,20 @@ class_name Interface
 ## [/codeblock]
 ## Just code:
 ## [codeblock]
-## var my_interface: MyInterface = MyInterface.get_interface(ImplementerObject.new(...))
+## var my_interface: MyInterface = MyInterface.get_implemention(ImplementerObject.new(...))
 ## var implementer: ImplementerObject = my_interface.get_object()
 ## [/codeblock]
 ## You can get access to "_object" in implementer interface to get reference to the implementer object
 
 const _NAME: StringName = &"Interface"
+const _EXCEPTIONS: PackedStringArray = [
+	"_init",
+	"get_object",
+	"get_interface_name",
+	"get_implemention",
+	"is_implemented_by"
+]
+
 
 var _object: Object
 
@@ -78,8 +86,22 @@ var _object: Object
 func _init(object: Object) -> void:
 	if !object: return
 	_object = object
+	
+	# Register implemention
 	@warning_ignore("static_called_on_instance")
 	_object.set_meta(_NAME + get_interface_name(), self)
+
+	# Implemention validation checking
+	var list: Array[Dictionary] = get_script().get_script_method_list()
+	var methods: Array[StringName] = []
+	for i in list:
+		var method: StringName = i.name
+		if method in _EXCEPTIONS:
+			continue
+		methods.append(method)
+	for j in methods:
+		var count: int = methods.count(j)
+		assert(count > 1, "Method %s is not implemented!" % [j])
 
 
 ## Returns the object by which the interface is implemented
@@ -112,13 +134,13 @@ static func get_interface_name() -> StringName:
 ##     return super(object, type) as MyInterface
 ## [/codeblock]
 ## 4. To make this work successfully, it's required to override [method get_interface_name] first
-static func get_interface(object: Object, type: StringName = get_interface_name()):
+static func get_implemention(object: Object, type: StringName = get_interface_name()):
 	return object.get_meta(_NAME + type, null)
 
 
 ## Returns [code]true[/code] if the object implemented an interface named [param name]
-static func has_interface(object: Object) -> bool:
-	return get_interface(object) != null
+static func is_implemented_by(object: Object) -> bool:
+	return get_implemention(object) != null
 
 
 # 👇 === Here you can define your own interfaces == 👇 #
