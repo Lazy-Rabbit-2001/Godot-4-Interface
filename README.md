@@ -1,6 +1,12 @@
 # Godot 4 GDScript Interface v1.1
 A custom class for Godot 4 to temporarily provide interface system for GDScript language
 
+## TEMPORARILY DEPRECATED
+### Why deprecated?
+It's my fault of unaware of the problem that a variable should NOT given as a referencial type (like `Array`, `Dictionary`, `Object`, etc) in `RefCounted`, which may cause cyclic reference that may lead to potential memory leak. Plus, there is no such a signal for `Object`, which made it difficult to make auto-free-system for `Interface`. Therefore, in order to keep developers' memories safe, the system is temporarily deprecated.
+### When restart and continue?
+Not sure, but once the feature I mentioned for `Object` gets implemented, I'll immediately update this system till `trait` becomes actually installed
+
 ## Changelog
 ### v1.1:  
 * Added implemention checking, now if you don't implement all methods from an interface in an implementer interface, an error will be thrown during the runtime
