@@ -4,7 +4,7 @@ class_name Interface
 ## Basic class for interface definition
 ##
 ## To define a new interface:[br]
-## 1. Extend the class [Interface] with a new inner class in [Interface] class file[br]
+## 1. Extend the class [Interface] with a new inner class in [InterfacesList] class file[br]
 ## 2. In the inner class, code abstract functions you want to deploy. Because of lacking [code]abstract[/code] keyword, it's
 ## required to make all these functions [code]pass[/code] or [code]return null[/code](for returnal methods)
 ## [codeblock]
@@ -21,16 +21,16 @@ class_name Interface
 ##     func my_abstract_function(args) -> void: pass
 ##     func my_abstract_function_with_return(args) -> Type: return null
 ## [/codeblock]
-## 3. In the script you want to implement a interface, define a inner class extending that inner class in [Interface], and the name
+## 3. In the script you want to implement a interface, define a inner class extending that inner class in [InterfacesList], and the name
 ## [b]MUST[/b] keep the same as the implementee
 ## [codeblock]
 ## # In the implementer's script
-## class MyInterface extends Interface.MyInterface: ...
+## class MyInterface extends InterfacesList.MyInterface: ...
 ## # Keep the name same as one in the class Interface!
 ## [/codeblock]
 ## 4. Override ALL methods in the interface you just "implemented"
 ## [codeblock]
-## class MyInterface extends Interface.MyInterface:
+## class MyInterface extends InterfacesList.MyInterface:
 ##     func my_abstract_function(args) -> void: pass 
 ##     #(or implementing codes, or "super(args)")
 ##     
@@ -141,6 +141,3 @@ static func get_implemention(object: Object, type: StringName = get_interface_na
 ## Returns [code]true[/code] if the object implemented an interface named [param name]
 static func is_implemented_by(object: Object) -> bool:
 	return get_implemention(object) != null
-
-
-# 👇 === Here you can define your own interfaces == 👇 #
