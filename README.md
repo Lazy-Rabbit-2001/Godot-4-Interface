@@ -7,6 +7,7 @@ A custom class for Godot 4 to temporarily provide interface system for GDScript 
 * Changed names of some methods:
 *   `get_interface` -> `get_implemention`
 *   `has_interface` -> `is_implemented_by`
+* Now all custom interfaces are required to move into `InterfacesList` class. File name: `class_interfaces_list.gd`
 
 ## What is Interface?
 An interface is such a thing **to define which methods should a class have and should be implemented**. It's such a function in most of modern computer languages like C#, Java, etc.  
@@ -69,7 +70,7 @@ Very easy, just clone the git to the project being worked on
 
 ## How to Use the Addon?
 To create a custom interface:  
-  1. In the `class_interface.gd`, define an inner class below the comment line, with inheritance from `Interface` class
+  1. In the `class_interfaces_list.gd`, define an inner class below the comment line, with inheritance from `Interface` class
   2. In that inner class, define the abstract methods  
       **NOTE:** Currently there haven't been `abstract` keyword in GDScript, so each method to be defined are required to be filled with `pass` or `return null` initially
      ```GDScript
@@ -93,17 +94,18 @@ To create a custom interface:
      # In the implementer class
      class_name Implementer
      
-     class MyInterface extends Interface.MyInterface:
+     class MyInterface extends InterfacesList.MyInterface:
        ...
      ```
-  4. In the inner class above, override the methods to complete implement
+  4. In the inner class above, override all the methods to complete implement
      ```GDSCript
-     class MyInterface extends Interface.MyInterface:
+     class MyInterface extends InterfacesList.MyInterface:
        func my_func(...) -> void:
          ...
        func my_func_returnal(...) -> Type:
          ...
      ```
+     Otherwise, an error will be thrown during the runtime
   5. Instantiate the class above via ANY ONE of the following two ways:  
      5.1. Via the constructor:  
      ```GDScript
@@ -156,8 +158,7 @@ Of course will, since you can directly use interface(trait) in GDScript, and thi
 
 
 ## Known Issues
-  1. Due to performance problems, if you don't implement all methods from an interface, no errors will be thrown. This is impossible to fix since method checking in `_init()` on each instance (especially when instances is of dozens) will take longer time than one without the checking. So it's allowed to partially implement, but also required to remember which methods are implemented and which are not.
-  2. Via this piece of code:  
+  1. Via this piece of code:  
   ```GDScript
   var interface: MyInterface = MyInterface.get_interface(Implementer.new())
   var implementer: Implementer = interface.get_object()
