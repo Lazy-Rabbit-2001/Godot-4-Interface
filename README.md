@@ -121,13 +121,13 @@ To call the method, you can do it like this:
 ```GDScript
 func _ready() -> void:
   for i in get_tree().get_nodes_in_group("test"): # i's type is unknown and uncertain
-    if !MyInterface.has_interface(i): continue # Check if the object i has implemented the interface MyInterface, and if not, then skip calling
-    MyInterface.get_instance(i).my_func(...)
+    if !MyInterface.is_implemented_by(i): continue # Check if the object i has implemented the interface MyInterface, and if not, then skip calling
+    MyInterface.get_implemention(i).my_func(...)
 ```
 
 To create an instance via the interface implemented by some object, you can:  
 ```GDScript
-var interface: MyInterface = MyInterface.get_interface(Implementer.new())
+var interface: MyInterface = MyInterface.get_implemention(Implementer.new())
 var implementer: Implementer = interface.get_object()
 ```
 
